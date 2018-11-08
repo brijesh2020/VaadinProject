@@ -1,0 +1,1 @@
+$wnd.com_example_widgetset_ExampleWidgetset.runAsyncCallback2('Wib(1884,1,bke);_.$b=function jyc(){ecc((!Ybc&&(Ybc=new mcc),Ybc),this.a.d)};Pde(Dh)(2);\n//# sourceURL=com.example.widgetset.ExampleWidgetset-2.js\n')

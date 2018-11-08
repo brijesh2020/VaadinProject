@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.example</groupId>
+		<artifactId>root-project</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>widgetset</artifactId>
+	<name>widgetset</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-client</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>${vaadin.version}</version>
+				<configuration>
+					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+					<webappDirectory>${basedir}/src/main/resources/VAADIN/widgetsets</webappDirectory>
+					<draftCompile>false</draftCompile>
+					<style>OBF</style>
+					<strict>true</strict>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>resources</goal>
+							<goal>compile</goal>
+							<goal>compile-theme</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<!-- Clean up also any pre-compiled themes -->
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/webapp/VAADIN/themes</directory>
+							<includes>
+								<include>**/styles.css</include>
+								<include>**/styles.scss.cache</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+
+			<!-- The Jetty plugin allows us to easily test the development build by
+				running jetty:run on the command line. -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<scanIntervalSeconds>2</scanIntervalSeconds>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
